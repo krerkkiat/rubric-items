@@ -1,33 +1,34 @@
+
 function onOpen() {
-  var ui = SpreadsheetApp.getUi();
+  let ui = SpreadsheetApp.getUi()
   ui.createMenu('Rubic')
       .addItem('Current items', 'showSidebar')
       .addToUi()
 }
 
 function showSidebar() {
-  var html = HtmlService.createTemplateFromFile('Page')
+  let html = HtmlService.createTemplateFromFile('Page')
         .evaluate()
         .setTitle('Current Rubric Items')
   SpreadsheetApp.getUi()
     .showSidebar(html)
 }
 
-function include(filename) {
+function include(filename: string) {
   return HtmlService.createHtmlOutputFromFile(filename)
         .getContent()
 }
 
 function getActiveRubricItems() {
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-  var rubricSheet = spreadsheet.getSheetByName('rubric')
-  var rubricRange = rubricSheet.getDataRange()
-  var rubricData = rubricRange.getValues()
+  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  let rubricSheet = spreadsheet.getSheetByName('rubric')
+  let rubricRange = rubricSheet.getDataRange()
+  let rubricData = rubricRange.getValues()
 
-  var sheet = SpreadsheetApp.getActiveSheet()
-  var applicableRubricItems = []
+  let sheet = SpreadsheetApp.getActiveSheet()
+  let applicableRubricItems = []
 
-  for (var i = 0; i < rubricData.length; i++) {
+  for (let i: number = 0; i < rubricData.length; i++) {
     if (rubricData[i][1] == sheet.getName()) {
       applicableRubricItems.push(rubricData[i])
     }
@@ -35,30 +36,30 @@ function getActiveRubricItems() {
   return applicableRubricItems
 }
 
-function setCellValue(text) {
-  var range = SpreadsheetApp.getActiveRange()
+function setCellValue(text: string) {
+  let range = SpreadsheetApp.getActiveRange()
   range.setValue(text)
   console.log(range)
   console.log(text)
 }
 
-function addRubricItem(id, description, points) {
-  var activeSheet = SpreadsheetApp.getActiveSheet()
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-  var rubricSheet = spreadsheet.getSheetByName('rubric')
+function addRubricItem(id: string, description: string, points: string) {
+  let activeSheet = SpreadsheetApp.getActiveSheet()
+  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  let rubricSheet = spreadsheet.getSheetByName('rubric')
 
-  var sheetName = activeSheet.getName()
+  let sheetName = activeSheet.getName()
   rubricSheet.appendRow([id, sheetName, description, points])
 }
 
 function RUBRIC_ITEMS() {
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-  var rubricSheet = spreadsheet.getSheetByName('rubric')
-  var rubricRange = rubricSheet.getDataRange()
-  var data = rubricRange.getValues()
-  var text = ''
+  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  let rubricSheet = spreadsheet.getSheetByName('rubric')
+  let rubricRange = rubricSheet.getDataRange()
+  let data = rubricRange.getValues()
+  let text = ''
 
-  var is_in_comment_state = false
+  let is_in_comment_state = false
 
   for (var arg_idx = 0; arg_idx < arguments.length; arg_idx++) {
     if (is_in_comment_state) {
