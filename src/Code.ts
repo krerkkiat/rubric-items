@@ -1,3 +1,5 @@
+/// <reference path="../lib/lib.d.ts" />
+// Importing it directly will add export keyword which fail on Google Apps Script.
 
 function onOpen() {
   let ui = SpreadsheetApp.getUi()
@@ -19,18 +21,23 @@ function include(filename: string) {
         .getContent()
 }
 
-function getActiveRubricItems() {
+function getActiveRubricItems(): RubricItem[] {
   let spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
   let rubricSheet = spreadsheet.getSheetByName('rubric')
   let rubricRange = rubricSheet.getDataRange()
   let rubricData = rubricRange.getValues()
 
   let sheet = SpreadsheetApp.getActiveSheet()
-  let applicableRubricItems = []
+  let applicableRubricItems: RubricItem[] = []
 
   for (let i: number = 0; i < rubricData.length; i++) {
     if (rubricData[i][1] == sheet.getName()) {
-      applicableRubricItems.push(rubricData[i])
+      applicableRubricItems.push({
+        id: rubricData[i][0],
+        homeworkId: rubricData[i][1],
+        description: rubricData[i][2],
+        points: rubricData[i][3]
+      })
     }
   }
   return applicableRubricItems
@@ -39,8 +46,6 @@ function getActiveRubricItems() {
 function setCellValue(text: string) {
   let range = SpreadsheetApp.getActiveRange()
   range.setValue(text)
-  console.log(range)
-  console.log(text)
 }
 
 function addRubricItem(id: string, description: string, points: string) {
@@ -61,11 +66,11 @@ function RUBRIC_ITEMS() {
 
   let is_in_comment_state = false
 
-  for (var arg_idx = 0; arg_idx < arguments.length; arg_idx++) {
+  for (let arg_idx: number = 0; arg_idx < arguments.length; arg_idx++) {
     if (is_in_comment_state) {
       text = text + "- " + arguments[arg_idx] + "\n"
     } else {
-      for (var i = 1; i < data.length; i++) {
+      for (let i: number = 1; i < data.length; i++) {
         if (arguments[arg_idx] == 'comment') {
           is_in_comment_state = true
         } else if (arguments[arg_idx] == data[i][0]) {
