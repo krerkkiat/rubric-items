@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <?!= include('Stylesheet') ?>
+  </head>
+  <body>
+    <input type="button" value="Refresh" onclick="google.script.run.withSuccessHandler(showActiveRubricItems).getActiveRubricItems()" class="pure-button button-small pure-button-primary" />
+    <input type="button" value="Close" onclick="google.script.host.close()" class="pure-button button-small" />
+
+    <form name="new-rubric-item" id="new-rubric-item" class="pure-form">
+      <fieldset class="pure-group">
+        <div class="pure-g">
+          <div class="pure-u-1">
+            <input type="text" class="pure-input-1 input-xsmall" name="item-description" id="item-description" placeholder="Description" />
+          </div>
+        </div>
+        <div class="pure-g">
+          <div class="pure-u-1-2">
+            <input type="text" class="pure-input-1 input-xsmall" name="item-points" id="item-points" placeholder="Points" />
+          </div>
+          <div class="pure-u-1-2">
+            <input type="text" class="pure-input-1 input-xsmall" name="item-id" id="item-id" placeholder="ID" />
+          </div>
+        </div>
+      </fieldset>
+      <input type="submit" name="add" id="add-button" value="Add" class="pure-button pure-button-primary button-small" />
+    </form>
+
+    <ul id="list-of-rubric-items">
+    </ul>
+
+    <form name="add-items" id="add-items" class="pure-form">
+      <input type="submit" name="add-items-button" id="add-items-button" value="Add items" class="pure-button pure-button-primary button-small" />
+    </form>
+
+    <?!= include('JavaScript') ?>
+  </body>
+</html>
