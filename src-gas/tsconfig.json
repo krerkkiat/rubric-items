@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "lib": ["es6"],
+        "target": "ES2019",
+        "types": ["google-apps-script"]
+    }
+}

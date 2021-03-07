@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "lib": ["es6", "dom"],
+        "target": "ES2019",
+        "types": ["google.script.client-side"],
+    },
+    "files": [
+        "ClientCode.ts"
+    ]
+}
