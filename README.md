@@ -6,8 +6,7 @@
 $ npm run build
 $ npm run build:client
 $ npm run copy
-$ cd dist
-$ clasp push
+$ npm run push
 ```
 
 `npm run copy` copy Google Apps Script files and HTML files to dist. It then insert compiled JavaScript into `JavaScript.html`. `HtmlService.createHtmlOutputFromFile`

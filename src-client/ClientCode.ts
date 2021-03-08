@@ -11,6 +11,9 @@ function showActiveRubricItems(rubricItems: RubricItem[]) {
     item.innerHTML = '<input type="checkbox" class="item-checkbox" value="" /> ' + rubricItems[idx].description + ' (' + rubricItems[idx].points + ')'
     listElement.append(item)
   }
+  if (rubricItems.length == 0) {
+    listElement.innerHTML = '<li>No item found</li>'
+  }
 }
 
 function onNewItemFormSubmit() {
@@ -18,9 +21,9 @@ function onNewItemFormSubmit() {
   let pointsElem = document.getElementById('item-points') as HTMLInputElement
   let idElem = document.getElementById('item-id') as HTMLInputElement
 
-  const description = descriptionElem.value
-  const points = pointsElem.value
-  const id = idElem.value
+  const description: string = descriptionElem.value
+  const points: number = parseFloat(pointsElem.value)
+  const id: string = idElem.value
 
   google.script.run.withSuccessHandler(function() {
     console.log('Rubric item added')

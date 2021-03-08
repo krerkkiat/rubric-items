@@ -15,7 +15,7 @@
   "scripts": {
     "build": "cd src && tsc --project tsconfig.json --outDir ../dist",
     "build:client": "cd src-client && tsc --project tsconfig.json --outDir ../dist",
-    "copy": "cp src-client/*.html dist/ && cp appsscript.json dist/ && cp .claspignore dist/ && cp .clasp.json dist/ && sed -i -e '/marker-replace-with-compiled-js/r ./dist/ClientCode.js' ./dist/JavaScript.html && sed -i 's/marker-replace-with-compiled-js//' ./dist/JavaScript.html",
+    "copy": "./scripts/copy.sh",
     "push": "cd dist/ && clasp push"
   }
 }
